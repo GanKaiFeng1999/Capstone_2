@@ -1,5 +1,5 @@
 import streamlit as st
-import pickle
+#import pickle
 import pandas as pd
 import joblib
 import overpy
@@ -7,18 +7,22 @@ from geopy.geocoders import Nominatim
 
 
 
-def load_model():
-    with open('saved_steps.pkl', 'rb') as file:
-        data = pickle.load(file)
-    return data
+#def load_model():
+    #with open('saved_steps.pkl', 'rb') as file:
+        #data = pickle.load(file)
+    #return data
 
 
-data = load_model()
-model = data['model']
-le_location = data['le_location']
-le_proptype = data['le_proptype']
-le_furnishing= data['le_furnishing']
-scaler = joblib.load('scaler.save')
+#data = load_model()
+#model = data['model']
+#le_location = data['le_location']
+#le_proptype = data['le_proptype']
+#le_furnishing= data['le_furnishing']
+model = joblib.load('model')
+le_location = joblib.load('le_location')
+le_proptype = joblib.load('le_proptype')
+le_furnishing = joblib.load('furnishing')
+scaler = joblib.load('scaler')
 
 
 geolocator = Nominatim (user_agent='web app')
