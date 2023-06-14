@@ -21,7 +21,7 @@ from geopy.geocoders import Nominatim
 model = joblib.load('model')
 le_location = joblib.load('le_location')
 le_proptype = joblib.load('le_proptype')
-le_furnishing = joblib.load('furnishing')
+le_furnishing = joblib.load('le_furnishing')
 scaler = joblib.load('scaler')
 
 
