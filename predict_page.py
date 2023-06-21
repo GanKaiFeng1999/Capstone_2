@@ -22,7 +22,7 @@ model = joblib.load('model')
 le_location = joblib.load('le_location')
 le_proptype = joblib.load('le_proptype')
 le_furnishing = joblib.load('le_furnishing')
-scaler = joblib.load('scaler')
+#scaler = joblib.load('scaler')
 
 
 geolocator = Nominatim (user_agent='web app')
@@ -199,9 +199,9 @@ def show_predict_page():
             'Schools', 'Hospitals', 'Malls', 'Restaurants']
         )
 
-        numerical = ['Rooms', 'Bathrooms', 'Size', 'Store Rooms',\
-        'Places of Worship','Schools', 'Hospitals', 'Malls', 'Restaurants']
-        x[numerical] = scaler.transform(x[numerical])
+        #numerical = ['Rooms', 'Bathrooms', 'Size', 'Store Rooms',\
+        #'Places of Worship','Schools', 'Hospitals', 'Malls', 'Restaurants']
+        #x[numerical] = scaler.transform(x[numerical])
 
         x['Location'] = le_location.transform(x['Location'])
         x['Property Type'] = le_proptype.transform(x['Property Type'])
