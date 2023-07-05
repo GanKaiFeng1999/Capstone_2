@@ -1,28 +1,14 @@
 import streamlit as st
-#import pickle
 import pandas as pd
 import joblib
 import overpy
 from geopy.geocoders import Nominatim
 
 
-
-#def load_model():
-    #with open('saved_steps.pkl', 'rb') as file:
-        #data = pickle.load(file)
-    #return data
-
-
-#data = load_model()
-#model = data['model']
-#le_location = data['le_location']
-#le_proptype = data['le_proptype']
-#le_furnishing= data['le_furnishing']
 model = joblib.load('model')
 le_location = joblib.load('le_location')
 le_proptype = joblib.load('le_proptype')
 le_furnishing = joblib.load('le_furnishing')
-#scaler = joblib.load('scaler')
 
 
 geolocator = Nominatim (user_agent='web app')
@@ -192,16 +178,12 @@ def show_predict_page():
     predict = st.button('Predict Price')
     if predict:
         x = pd.DataFrame(
-            [[location, room, bathroom, proptype, size, furnishing, storeroom,\
+            [[location, room, bathroom, proptype, size, furnishing, storeroom,
              worship, school, hospital, mall, restaurant]],
-            columns = ['Location', 'Rooms', 'Bathrooms', 'Property Type', \
-            'Size', 'Furnishing', 'Store Rooms', 'Places of Worship',\
+            columns = ['Location', 'Rooms', 'Bathrooms', 'Property Type',
+            'Size', 'Furnishing', 'Store Rooms', 'Places of Worship',
             'Schools', 'Hospitals', 'Malls', 'Restaurants']
         )
-
-        #numerical = ['Rooms', 'Bathrooms', 'Size', 'Store Rooms',\
-        #'Places of Worship','Schools', 'Hospitals', 'Malls', 'Restaurants']
-        #x[numerical] = scaler.transform(x[numerical])
 
         x['Location'] = le_location.transform(x['Location'])
         x['Property Type'] = le_proptype.transform(x['Property Type'])
@@ -209,7 +191,6 @@ def show_predict_page():
 
         predicted_price = model.predict(x)
         st.subheader(f'The predicted price is RM {predicted_price[0]:,.2f}')
-
 
 
 show_predict_page()
